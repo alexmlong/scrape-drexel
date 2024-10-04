@@ -2,8 +2,6 @@ import os
 from requests_html import HTMLSession
 import csv
 
-student = r.html.find('.directory-list-item__body')
-
 def extractStudent(studentEl):
     title = studentEl.find('.directory-list-item__title', first=True).text
     title = title.split(',')
