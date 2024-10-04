@@ -6,12 +6,14 @@ session = HTMLSession()
 def extractStudent(studentEl):
     title = studentEl.find('.directory-list-item__title', first=True).text
     title = title.split(',')
-    name = f"{title[0]}, {title[1]}"
-    department = title[2]
-    college = title[3]
-    email = studentEl.find('.icon-link__text', first=True).text
+    firstName = title[1].strip()
+    lastName = title[0].strip()
+    department = title[2].strip()
+    college = title[3].strip()
+    email = studentEl.find('.icon-link__text', first=True).text.strip()
     return {
-        'name': name,
+        'firstName': firstName,
+        'lastName': lastName,
         'department': department,
         'college': college,
         'email': email
@@ -49,7 +51,7 @@ for letter in 'abcdefghijklmnopqrstuvwxyz':
             page += 1
         
         with open('students.csv', 'a', newline='') as csvfile:
-            fieldnames = ['index', 'name', 'department', 'college', 'email']
+            fieldnames = ['index', 'firstName', 'lastName', 'department', 'college', 'email']
             writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
             
             if headersNeeded:
