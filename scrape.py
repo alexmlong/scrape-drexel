@@ -1,6 +1,7 @@
 import os
 from requests_html import HTMLSession
 import csv
+session = HTMLSession()
 
 def extractStudent(studentEl):
     title = studentEl.find('.directory-list-item__title', first=True).text
